@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f0e5">
+<title>Мадина & Азамат | Кыз узатуу</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f8f3e9;
+  --ivory: #fffdf7;
+  --gold: #c5a16a;
+  --brown: #5b3827;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--brown);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+/* ENVELOPE */
+
+#opening {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle, #fffdf8, #eee1cf);
+  transition: opacity 1s, visibility 1s;
+}
+
+#opening.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.opening-content {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.opening-caption {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  color: #8a6948;
+}
+
+.envelope {
+  position: relative;
+  width: min(340px, 85vw);
+  height: 225px;
+  margin: auto;
+  cursor: pointer;
+  perspective: 1000px;
+  filter: drop-shadow(0 15px 25px #8d775033);
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, #fffdf8, #eadfcf);
+  border: 1px solid #d7c4a6;
+  border-radius: 5px;
+}
+
+.envelope-body::before,
+.envelope-body::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  top: 0;
+}
+
+.envelope-body::before {
+  left: 0;
+  background: #f9f3e8;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.envelope-body::after {
+  right: 0;
+  background: #eadcc8;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.envelope-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(40deg, #e8d8c2, #fffaf0);
+  clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+  z-index: 3;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(160deg, #fffdf8, #e8d9c2);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 5;
+  transform-origin: top;
+  transition: transform 1s ease;
+}
+
+.seal {
+  position: absolute;
+  z-index: 8;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e4c58a, #9e7338);
+  border: 5px solid #f4e4c5;
+  box-shadow: 0 3px 12px #80602f66;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff8e8;
+  font-family: 'Great Vibes', cursive;
+  font-size: 34px;
+  transition: opacity .4s;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .seal { opacity: 0; }
+
+.tap-text {
+  margin-top: 35px;
+  color: #9b805d;
+  font-size: 16px;
+  letter-spacing: 2px;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .4; }
+}
+
+/* WEBSITE */
+
+#main {
+  display: none;
+}
+
+#main.show {
+  display: block;
+  animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+  padding: 75px 20px;
+  text-align: center;
+}
+
+.section-inner {
+  max-width: 650px;
+  margin: auto;
+}
+
+.small-title {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 13px;
+  color: #a98a60;
+}
+
+.gold-line {
+  width: 65px;
+  height: 1px;
+  background: var(--gold);
+  margin: 22px auto;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(25px, 7vw, 38px);
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  padding: 60px 20px;
+  background:
+    linear-gradient(#33231733, #33231766),
+    url('cover.jpg') center/cover no-repeat,
+    #d9c8ae;
+  color: white;
+}
+
+.hero-content {
+  padding: 35px 15px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #fff9e5aa;
+  outline: 1px solid #fff9e566;
+  outline-offset: 8px;
+}
+
+.hero .small-title { color: #fff5df; }
+
+.hero-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 12vw, 85px);
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 20px 0;
+  text-shadow: 0 3px 12px #30201366;
+}
+
+.hero-date {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 3px;
+  font-size: 19px;
+}
+
+/* INVITATION */
+
+.invitation {
+  background: #fffdf7;
+  background-image: radial-gradient(#d5bd9b22 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+.invitation-text {
+  font-size: 23px;
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 25px auto;
+}
+
+.parents {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(36px, 8vw, 55px);
+  margin: 20px 0;
+}
+
+/* GALLERY */
+
+.gallery { background: #f0e7d9; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border: 5px solid #fffdf7;
+  box-shadow: 0 5px 18px #65472a18;
+}
+
+.gallery-grid img:first-child {
+  grid-column: span 2;
+  height: 390px;
+}
+
+/* EVENT */
+
+.event-card {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 40px 20px;
+  background: #fffdf8;
+  border: 1px solid #d9c5a4;
+  outline: 1px solid #d9c5a455;
+  outline-offset: 6px;
+}
+
+.event-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.event-time {
+  font-size: 27px;
+  margin: 12px 0 25px;
+}
+
+.event-place {
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  margin: 10px 0;
+}
+
+.event-info {
+  font-size: 21px;
+  line-height: 1.6;
+}
+
+.map-button {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: #9e7951;
+  padding: 13px 30px;
+  margin-top: 20px;
+  font-size: 17px;
+  border-radius: 3px;
+}
+
+/* COUNTDOWN */
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 35px auto;
+  flex-wrap: wrap;
+}
+
+.count-box {
+  min-width: 65px;
+  padding: 13px 8px;
+  background: #fffdf8;
+  border: 1px solid #e3d2b6;
+}
+
+.count-box strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.count-box span {
+  font-size: 14px;
+  color: #9d805c;
+}
+
+/* FOOTER */
+
+.footer {
+  padding: 65px 20px;
+  background: #e9ddca;
+  text-align: center;
+}
+
+.footer-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+/* MUSIC */
+
+.music-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  border: 1px solid #c5a16a;
+  background: #fffaf0;
+  color: #76563a;
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px #4b321d22;
+}
+
+.music-button.playing {
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* MOBILE */
+
+@media(max-width:480px) {
+  .hero { min-height: 85vh; }
+  .gallery-grid img { height: 210px; }
+  .gallery-grid img:first-child { height: 300px; }
+  .invitation-text { font-size: 21px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCREEN: ENVELOPE -->
+
+<div id="opening">
+
+  <div class="opening-content">
+
+    <p class="opening-caption">
+      Сизге өзгөчө чакыруу бар
+    </p>
+
+    <div class="envelope" id="envelope"
+         onclick="openInvitation()">
+
+      <div class="envelope-body"></div>
+      <div class="envelope-bottom"></div>
+      <div class="envelope-flap"></div>
+
+      <div class="seal">M & A</div>
+
+    </div>
+
+    <p class="tap-text">
+      ЧАКЫРУУНУ АЧУУ ҮЧҮН БАСЫҢЫЗ
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="weddingMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-button" id="musicButton"
+        onclick="toggleMusic()" style="display:none">
+  ♫
+</button>
+
+<!-- MAIN WEBSITE -->
+
+<main id="main">
+
+  <!-- COVER -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <p class="small-title">
+        Кыз узатуу тоюна чакыруу
+      </p>
+
+      <h1 class="hero-names">
+        Мадина<br>&<br>Азамат
+      </h1>
+
+      <div class="gold-line"
+           style="background:#fff5df"></div>
+
+      <p class="hero-date">
+        20 • 11 • 2026
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- INVITATION -->
+
+  <section class="section invitation">
+
+    <div class="section-inner">
+
+      <p class="small-title">Чакыруу</p>
+
+      <h2>Урматтуу коноктор!</h2>
+
+      <div class="gold-line"></div>
+
+      <p class="invitation-text">
+        Сиздерди жүрөгүбүздөгү чоң кубаныч
+        менен бөлүшүүгө чакырабыз!
+        <br><br>
+        Кызыбыз Мадинанын кыз узатуу
+        тоюна арналган салтанаттуу
+        кечебиздин кадырлуу коногу болуп,
+        ак дасторконубуздан даам сызып,
+        баталарыңызды берип кетүүгө
+        чакырабыз!
+      </p>
+
+      <p class="small-title">
+        Терең урматтоо менен, той ээлери
+      </p>
+
+      <p class="parents">
+        Нурбек & Айжамал
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- PHOTO GALLERY -->
+
+  <section class="section gallery">
+
+    <div class="section-inner">
+
+      <p class="small-title">Биздин өзгөчө күн</p>
+
+      <h2>Эсте калар көз ирмемдер</h2>
+
+      <div class="gold-line"></div>
+
+      <div class="gallery-grid">
+
+        <img src="photo1.jpg"
+             alt="Мадина менен Азамат"
+             onerror="this.style.display='none'">
+
+        <img src="photo2.jpg"
+             alt="Эскерүүлөр"
+             onerror="this.style.display='none'">
+
+        <img src="photo3.jpg"
+             alt="Өзгөчө көз ирмем"
+             onerror="this.style.display='none'">
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- EVENT DETAILS -->
+
+  <section class="section">
+
+    <div class="section-inner">
+
+      <p class="small-title">Күтөбүз сиздерди</p>
+
+      <h2>Тойдун дареги</h2>
+
+      <div class="gold-line"></div>
+
+      <div class="event-card">
+
+        <p class="event-date">
+          20-ноябрь, 2026
+        </p>
+
+        <p class="event-time">
+          Саат 17:00
+        </p>
+
+        <div class="gold-line"></div>
+
+        <p class="small-title">Ош шаары</p>
+
+        <p class="event-place">
+          «Динат» рестораны
+        </p>
+
+        <p class="event-info">
+          Сиздерди ушул кубанычтуу күнү
+          жан дүйнөбүз менен күтөбүз!
+        </p>
+
+        <a class="map-button"
+           href="https://www.google.com/maps/search/?api=1&query=Динат+ресторан+Ош"
+           target="_blank"
+           rel="noopener">
+          Даректи көрүү ↗
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- COUNTDOWN -->
+
+  <section class="section invitation">
+
+    <div class="section-inner">
+
+      <p class="small-title">
+        Кубанычтуу күнгө чейин
+      </p>
+
+      <h2>Санак башталды</h2>
+
+      <div class="countdown">
+
+        <div class="count-box">
+          <strong id="days">00</strong>
+          <span>Күн</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="hours">00</strong>
+          <span>Саат</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="minutes">00</strong>
+          <span>Мүнөт</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="seconds">00</strong>
+          <span>Секунд</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <p class="small-title">
+      Сиздерди чыдамсыздык менен күтөбүз
+    </p>
+
+    <p class="footer-names">
+      Мадина & Азамат
+    </p>
+
+    <div class="gold-line"></div>
+
+    <p style="font-size:19px;line-height:1.6">
+      Урматтоо менен,<br>
+      Нурбек & Айжамал
+    </p>
+
+    <p style="margin-top:30px;color:#a78a68">
+      20.11.2026
+    </p>
+
+  </footer>
+
+</main>
+
+<script>
+
+/* OPEN ENVELOPE */
+
+function openInvitation() {
+
+  const envelope = document.getElementById('envelope');
+  const opening = document.getElementById('opening');
+  const main = document.getElementById('main');
+  const music = document.getElementById('weddingMusic');
+  const musicButton = document.getElementById('musicButton');
+
+  envelope.classList.add('open');
+
+  setTimeout(() => {
+
+    opening.classList.add('hide');
+    main.classList.add('show');
+
+    musicButton.style.display = 'block';
+
+    window.scrollTo(0, 0);
+
+    music.play().then(() => {
+      musicButton.classList.add('playing');
+    }).catch(() => {
+      musicButton.classList.remove('playing');
+    });
+
+  }, 1100);
+
+}
+
+/* MUSIC PLAY / PAUSE */
+
+function toggleMusic() {
+
+  const music = document.getElementById('weddingMusic');
+  const button = document.getElementById('musicButton');
+
+  if (music.paused) {
+
+    music.play().then(() => {
+      button.classList.add('playing');
+    }).catch(() => {
+      alert('Музыканы кайра басып иштетиңиз.');
+    });
+
+  } else {
+
+    music.pause();
+    button.classList.remove('playing');
+
+  }
+
+}
+
+/* COUNTDOWN */
+
+function updateCountdown() {
+
+  const target = new Date('2026-11-20T17:00:00+06:00');
+  const now = new Date();
+
+  let difference = target - now;
+
+  if (difference <= 0) {
+
+    document.getElementById('days').textContent = '00';
+    document.getElementById('hours').textContent = '00';
+    document.getElementById('minutes').textContent = '00';
+    document.getElementById('seconds').textContent = '00';
+
+    return;
+  }
+
+  const days = Math.floor(
+    difference / (1000 * 60 * 60 * 24)
+  );
+
+  const hours = Math.floor(
+    (difference / (1000 * 60 * 60)) % 24
+  );
+
+  const minutes = Math.floor(
+    (difference / (1000 * 60)) % 60
+  );
+
+  const seconds = Math.floor(
+    (difference / 1000) % 60
+  );
+
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>
